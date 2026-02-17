@@ -24,12 +24,12 @@ public class Controller {
         int option = -1;
         while (option != 0) {
             printMenu();
-            System.out.print("Alege opțiunea: ");
+            System.out.print("Chose option: ");
             try {
                 option = Integer.parseInt(scanner.nextLine());
                 handleOption(option);
             } catch (NumberFormatException e) {
-                System.out.println("Te rog să introduci un număr valid.");
+                System.out.println("Invalid input.");
             }
         }
     }

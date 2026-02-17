@@ -10,17 +10,17 @@ import org.example.controller.Controller;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        //create repositories
+
         var supplyRepo = new SupplyRepository("supplies.json");
         var astronautRepo = new AstronautRepository("astronauts.json");
         var missionEventRepo = new MissionEventRepository("events.json");
 
-        //create services
+
         var supplyService = new SupplyService(supplyRepo);
         var astronautService = new AstronautService(astronautRepo);
         var missionEventService = new MissionEventService(missionEventRepo);
 
-        //create controller
+
         var controller = new Controller( astronautService, missionEventService,supplyService);
 
         controller.run();
