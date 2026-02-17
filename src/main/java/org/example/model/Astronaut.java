@@ -3,12 +3,7 @@ package org.example.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Astronaut implements HasId<Integer>{
-    //create a class Astronaut with the following fields:
-//    "id": 1,
-//    "name": "Ava Ionescu",
-//    "spacecraft": "Orion",
-//    "status": "ACTIVE",
-//    "experienceLevel": 9
+
 
     @JsonProperty("id") Integer id;
    @JsonProperty("name") String name;

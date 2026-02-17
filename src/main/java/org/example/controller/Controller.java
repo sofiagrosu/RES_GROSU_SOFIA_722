@@ -1,8 +1,10 @@
 package org.example.controller;
+import org.example.model.Astronaut;
 import org.example.service.AstronautService;
 import org.example.service.MissionEventService;
 import org.example.service.SupplyService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Controller {
@@ -39,7 +41,7 @@ public class Controller {
         System.out.println("3. Sort by Experience");
         System.out.println("4. Save Astronauts to file");
         System.out.println("5. Show first 5 event points");
-        System.out.println("6. Show risks");
+        System.out.println("6. Show ranking");
         System.out.println("7. Save report");
         System.out.println("0. Exit");
     }
@@ -51,24 +53,56 @@ public class Controller {
             case 3 -> sortByExperience();
             case 4 -> saveAstronautsToFile();
             case 5 -> showFirst5Events();
-//            case 6 -> showRisks();
+            case 6 -> showRanking();
 //            case 7 -> saveReport();
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
     }
 
+    private void showRanking() {
+
+       Map<Integer,Integer> resutl = missionEventService.calculateTotalScores();
+       Map<Astronaut,Integer> resultWithAstronaut = resutl.entrySet().stream()
+               .collect(java.util.stream.Collectors.toMap(
+                       e -> astronautService.findById(e.getKey()),
+                       Map.Entry::getValue
+               ));
+       //Berechnen Sie totalScore für alle Astronauten.
+        //● Geben Sie die Top 5 auf der Konsole aus, sortiert
+        //nach:
+        //● totalScore absteigend
+        //● bei Gleichstand name aufsteigend
+        //● Bestimmen und geben Sie zusätzlich das Leading
+        //spacecraft aus (= spacecraft des Astronauten auf
+        //Platz 1).
+
+        resultWithAstronaut.entrySet().stream()
+                .sorted((e1,e2)-> {
+                    int scoreComparison = Integer.compare(e2.getValue(), e1.getValue());
+                    if(scoreComparison != 0){
+                        return scoreComparison;
+                    }else{
+                        return e1.getKey().getName().compareToIgnoreCase(e2.getKey().getName());
+                    }
+                })
+                .limit(5)
+                .forEach(e -> System.out.println(e.toString()));
+
+      //Bestimmen und geben Sie zusätzlich das Leading
+        //spacecraft aus (= spacecraft des Astronauten auf
+        //Platz 1).
+        var leadingSpacecraft = resultWithAstronaut.entrySet().stream()
+                .max((e1,e2)-> Integer.compare(e1.getValue(), e2.getValue()))
+                .map(e -> e.getKey().getSpacecraft())
+                .orElse("No leading spacecraft found");
+
+        System.out.println("Leading spacecraft: " + leadingSpacecraft);
+
+    }
+
     private void showFirst5Events() {
-        //Punktberechnung
-        //Implementieren Sie die Berechnung der computedPoints für
-        //jedes MissionEvent gemäß den folgenden Regeln:
-        //● EVA → computedPoints = basePoints + 2 * day
-        //● SYSTEM_FAILURE → computedPoints = basePoints - 3 - day
-        //● SCIENCE → computedPoints = basePoints + (day % 4)
-        //● MEDICAL → computedPoints = basePoints - 2 * (day % 3)
-        //● COMMUNICATION → computedPoints = basePoints + 5
-        //Geben Sie anschließend die ersten 5 Events aus
-        //events.json auf der Konsole aus.
+
             missionEventService.calculatePoints();
             missionEventService.findAll().stream().limit(5).forEach(e -> System.out.println(e.toString()));
     }

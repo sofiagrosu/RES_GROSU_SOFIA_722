@@ -40,19 +40,7 @@ public class AstronautService {
      }
 
      public void saveAstronauts(String outputFilePath) {
-       //Schreiben in eine Datei
-         //Schreiben Sie die in Aufgabe 3 sortierte Astronauten
-         //Liste
-         //in
-         //umgekehrter
-         //Reihenfolge
-         //in
-         //die
-         //Datei
-         //astronauts_sorted.txt. Jeder Astronaut soll in einer
-         //eigenen Zeile gespeichert werden, im selben Format wie
-         //bei der Konsolenausgabe.
-         //create the file and write the sorted astronauts to it
+
          List<Astronaut> result = this.sortAstronautsByExperience();
 
          try (java.io.PrintWriter writer = new java.io.PrintWriter(outputFilePath)) {
@@ -65,4 +53,6 @@ public class AstronautService {
          }
 
      }
+
+
 }

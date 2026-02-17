@@ -2,14 +2,21 @@ package org.example.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MissionEvent implements HasId<Integer>{
+import static org.example.model.MissionEventType.*;
+
+public class MissionEvent implements HasId<Integer> {
 
 
-    @JsonProperty("id") Integer id;
-    @JsonProperty("astronautId") Integer astronautId;
-    @JsonProperty("day") Integer day;
-    @JsonProperty("type") MissionEventType type;
-    @JsonProperty("basePoints") Integer basePoints;
+    @JsonProperty("id")
+    Integer id;
+    @JsonProperty("astronautId")
+    Integer astronautId;
+    @JsonProperty("day")
+    Integer day;
+    @JsonProperty("type")
+    MissionEventType type;
+    @JsonProperty("basePoints")
+    Integer basePoints;
 
     public MissionEvent(Integer id, Integer astronautId, Integer day, MissionEventType type, Integer basePoints) {
         this.id = id;
@@ -69,9 +76,35 @@ public class MissionEvent implements HasId<Integer>{
     public void setComputedPoints(int computedPoints) {
         this.basePoints = computedPoints;
     }
+
     @Override
     public String toString() {
-       //Event <id> -> raw=<basePoints> -> computed=<computedPoints>
-        return "Event " + id + " -> raw=" + basePoints ;
+        //Event <id> -> raw=<basePoints> -> computed=<computedPoints>
+        return "Event " + id + " -> raw=" + basePoints;
+    }
+
+    public int getComputedPoints() {
+        int basePoints = getBasePoints();
+        int day = getDay();
+        int computedPoints = 0;
+
+        switch (type) {
+            case EVA:
+                computedPoints = basePoints + 2 * day;
+                break;
+            case SYSTEM_FAILURE:
+                computedPoints = basePoints - 3 - day;
+                break;
+            case SCIENCE:
+                computedPoints = basePoints + (day % 4);
+                break;
+            case MEDICAL:
+                computedPoints = basePoints - 2 * (day % 3);
+                break;
+            case COMMUNICATION:
+                computedPoints = basePoints + 5;
+                break;
+        }
+       return computedPoints;
     }
 }
