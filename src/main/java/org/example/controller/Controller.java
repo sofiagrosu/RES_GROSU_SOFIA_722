@@ -35,7 +35,7 @@ public class Controller {
     private void printMenu() {
         System.out.println("\n--- MENU ---");
         System.out.println("1. Show all");
-        System.out.println("2. Filter Vehicles and status");
+        System.out.println("2. Filter active astronauts by spacecraft");
         System.out.println("3. Sort by city");
         System.out.println("4. Save Vehicles to file");
         System.out.println("5. Show first 5 risk scores");
@@ -47,7 +47,7 @@ public class Controller {
     private void handleOption(int option) {
         switch (option) {
             case 1 -> showAll();
-//            case 2 -> filterByVehicleAndStatus();
+            case 2 -> filterAstronautBySpacecraft();
 //            case 3 -> sortByCity();
 //            case 4 -> saveVehiclesToFile();
 //            case 5 -> showFirst5Events();
@@ -58,22 +58,14 @@ public class Controller {
         }
     }
 
+    private void filterAstronautBySpacecraft() {
+
+        System.out.print("Enter spacecraft: ");
+        String spacecraft = scanner.nextLine();
+        astronautService.filterBySpacecraft(spacecraft).forEach(e -> System.out.println(e.toString()));
+    }
+
     private void showAll() {
-        //Lesen Sie die Daten aus den JSON-Dateien
-        //astronauts.json, events.json und supplies.json und
-        //speichern
-        //Sie
-        //diese
-        //in
-        //Java-Listen.
-        //anschließend auf der Konsole aus:
-        //● Anzahl der Astronauten
-        //● Anzahl der Ereignisse
-        //● Anzahl der Supplies
-        //Geben
-        //Sie
-        //● alle Astronauten (jeweils eine Zeile) in der
-        //Reihenfolge aus der JSON-Datei
 
         System.out.println("Anzahl der Astronauten: " + astronautService.findAll().size());
         System.out.println("Anzahl der Ereignisse: " + missionEventService.findAll().size());

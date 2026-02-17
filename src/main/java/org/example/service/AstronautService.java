@@ -14,8 +14,16 @@ public class AstronautService {
     public Astronaut findById(Integer id){
         return repo.findOne(id);}
 
-    //find all
+
     public List<Astronaut> findAll(){
         return repo.findAll();
      }
+
+     public List<Astronaut> filterBySpacecraft(String spacecraft) {
+
+            return repo.findAll().stream()
+                    .filter(astronaut -> astronaut.getSpacecraft().equalsIgnoreCase(spacecraft) && astronaut.getStatus().toString().equalsIgnoreCase("ACTIVE"))
+                    .toList();
+     }
+
 }
