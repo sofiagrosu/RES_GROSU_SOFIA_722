@@ -38,4 +38,31 @@ public class AstronautService {
                     })
                     .toList();
      }
+
+     public void saveAstronauts(String outputFilePath) {
+       //Schreiben in eine Datei
+         //Schreiben Sie die in Aufgabe 3 sortierte Astronauten
+         //Liste
+         //in
+         //umgekehrter
+         //Reihenfolge
+         //in
+         //die
+         //Datei
+         //astronauts_sorted.txt. Jeder Astronaut soll in einer
+         //eigenen Zeile gespeichert werden, im selben Format wie
+         //bei der Konsolenausgabe.
+         //create the file and write the sorted astronauts to it
+         List<Astronaut> result = this.sortAstronautsByExperience();
+
+         try (java.io.PrintWriter writer = new java.io.PrintWriter(outputFilePath)) {
+             result.stream()
+                     .sorted((a1, a2) -> Integer.compare(a1.getExperienceLevel(), a2.getExperienceLevel())) // Umgekehrte Reihenfolge
+                     .forEach(astronaut -> writer.println(astronaut.toString()));
+             System.out.println("The file has been updated " + outputFilePath);
+         } catch (java.io.IOException e) {
+             System.err.println("Error " + e.getMessage());
+         }
+
+     }
 }

@@ -37,7 +37,7 @@ public class Controller {
         System.out.println("1. Show all");
         System.out.println("2. Filter active astronauts by spacecraft");
         System.out.println("3. Sort by Experience");
-        System.out.println("4. Save Vehicles to file");
+        System.out.println("4. Save Astronauts to file");
         System.out.println("5. Show first 5 risk scores");
         System.out.println("6. Show risks");
         System.out.println("7. Save report");
@@ -49,13 +49,18 @@ public class Controller {
             case 1 -> showAll();
             case 2 -> filterAstronautBySpacecraft();
             case 3 -> sortByExperience();
-//            case 4 -> saveVehiclesToFile();
+            case 4 -> saveAstronautsToFile();
 //            case 5 -> showFirst5Events();
 //            case 6 -> showRisks();
 //            case 7 -> saveReport();
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
+    }
+
+    private void saveAstronautsToFile() {
+        String outputFilePath = "astronauts_sorted.txt";
+        astronautService.saveAstronauts(outputFilePath);
     }
 
     private void sortByExperience() {
