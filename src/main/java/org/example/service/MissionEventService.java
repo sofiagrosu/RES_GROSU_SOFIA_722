@@ -52,8 +52,7 @@ public class MissionEventService {
 
 
     }
-    //totalScore = Sum(computedPoints aus allen MissionEvents des
-    //Astronauten) + Sum(value aus allen Supplies des Astronauten)
+
 
     public Map<Integer, Integer> calculateTotalScores() {
         Map<Integer, Integer> totalScores = new HashMap<>();
@@ -67,6 +66,11 @@ public class MissionEventService {
         return totalScores;
     }
 
+    public void saveReport(String outputFilePath) {
+        List<MissionEvent> events = this.findAll();
+
+        repo. generateMissionReport( outputFilePath);
+    }}
 
 
 
@@ -74,4 +78,6 @@ public class MissionEventService {
 
 
 
-}
+
+
+

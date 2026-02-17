@@ -54,10 +54,15 @@ public class Controller {
             case 4 -> saveAstronautsToFile();
             case 5 -> showFirst5Events();
             case 6 -> showRanking();
-//            case 7 -> saveReport();
+            case 7 -> saveReport();
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
+    }
+
+    private void saveReport() {
+        String outputFilePath = "mission_report.txt";
+       missionEventService.saveReport(outputFilePath);
     }
 
     private void showRanking() {
@@ -68,14 +73,7 @@ public class Controller {
                        e -> astronautService.findById(e.getKey()),
                        Map.Entry::getValue
                ));
-       //Berechnen Sie totalScore für alle Astronauten.
-        //● Geben Sie die Top 5 auf der Konsole aus, sortiert
-        //nach:
-        //● totalScore absteigend
-        //● bei Gleichstand name aufsteigend
-        //● Bestimmen und geben Sie zusätzlich das Leading
-        //spacecraft aus (= spacecraft des Astronauten auf
-        //Platz 1).
+
 
         resultWithAstronaut.entrySet().stream()
                 .sorted((e1,e2)-> {
@@ -89,9 +87,7 @@ public class Controller {
                 .limit(5)
                 .forEach(e -> System.out.println(e.toString()));
 
-      //Bestimmen und geben Sie zusätzlich das Leading
-        //spacecraft aus (= spacecraft des Astronauten auf
-        //Platz 1).
+
         var leadingSpacecraft = resultWithAstronaut.entrySet().stream()
                 .max((e1,e2)-> Integer.compare(e1.getValue(), e2.getValue()))
                 .map(e -> e.getKey().getSpacecraft())
