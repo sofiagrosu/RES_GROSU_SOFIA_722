@@ -66,4 +66,12 @@ public class MissionEvent implements HasId<Integer>{
     }
 
 
+    public void setComputedPoints(int computedPoints) {
+        this.basePoints = computedPoints;
+    }
+    @Override
+    public String toString() {
+       //Event <id> -> raw=<basePoints> -> computed=<computedPoints>
+        return "Event " + id + " -> raw=" + basePoints ;
+    }
 }

@@ -38,7 +38,7 @@ public class Controller {
         System.out.println("2. Filter active astronauts by spacecraft");
         System.out.println("3. Sort by Experience");
         System.out.println("4. Save Astronauts to file");
-        System.out.println("5. Show first 5 risk scores");
+        System.out.println("5. Show first 5 event points");
         System.out.println("6. Show risks");
         System.out.println("7. Save report");
         System.out.println("0. Exit");
@@ -50,12 +50,27 @@ public class Controller {
             case 2 -> filterAstronautBySpacecraft();
             case 3 -> sortByExperience();
             case 4 -> saveAstronautsToFile();
-//            case 5 -> showFirst5Events();
+            case 5 -> showFirst5Events();
 //            case 6 -> showRisks();
 //            case 7 -> saveReport();
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
+    }
+
+    private void showFirst5Events() {
+        //Punktberechnung
+        //Implementieren Sie die Berechnung der computedPoints für
+        //jedes MissionEvent gemäß den folgenden Regeln:
+        //● EVA → computedPoints = basePoints + 2 * day
+        //● SYSTEM_FAILURE → computedPoints = basePoints - 3 - day
+        //● SCIENCE → computedPoints = basePoints + (day % 4)
+        //● MEDICAL → computedPoints = basePoints - 2 * (day % 3)
+        //● COMMUNICATION → computedPoints = basePoints + 5
+        //Geben Sie anschließend die ersten 5 Events aus
+        //events.json auf der Konsole aus.
+            missionEventService.calculatePoints();
+            missionEventService.findAll().stream().limit(5).forEach(e -> System.out.println(e.toString()));
     }
 
     private void saveAstronautsToFile() {
