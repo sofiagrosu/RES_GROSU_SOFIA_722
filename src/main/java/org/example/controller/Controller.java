@@ -46,7 +46,7 @@ public class Controller {
 
     private void handleOption(int option) {
         switch (option) {
-//            case 1 -> showAll();
+            case 1 -> showAll();
 //            case 2 -> filterByVehicleAndStatus();
 //            case 3 -> sortByCity();
 //            case 4 -> saveVehiclesToFile();
@@ -56,6 +56,29 @@ public class Controller {
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
+    }
+
+    private void showAll() {
+        //Lesen Sie die Daten aus den JSON-Dateien
+        //astronauts.json, events.json und supplies.json und
+        //speichern
+        //Sie
+        //diese
+        //in
+        //Java-Listen.
+        //anschließend auf der Konsole aus:
+        //● Anzahl der Astronauten
+        //● Anzahl der Ereignisse
+        //● Anzahl der Supplies
+        //Geben
+        //Sie
+        //● alle Astronauten (jeweils eine Zeile) in der
+        //Reihenfolge aus der JSON-Datei
+
+        System.out.println("Anzahl der Astronauten: " + astronautService.findAll().size());
+        System.out.println("Anzahl der Ereignisse: " + missionEventService.findAll().size());
+        System.out.println("Anzahl der Supplies: " + supplyService.findAll().size());
+        astronautService.findAll().forEach(e -> System.out.println(e.toString()));
     }
 
 }

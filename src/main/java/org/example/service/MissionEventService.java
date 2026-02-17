@@ -2,6 +2,9 @@ package org.example.service;
 
 import org.example.model.MissionEvent;
 import org.example.repository.MissionEventRepository;
+
+import java.util.List;
+
 public class MissionEventService {
 
     private MissionEventRepository repo ;
@@ -11,5 +14,9 @@ public class MissionEventService {
 
     public MissionEvent findById(Integer id) {
         return repo.findOne(id);
+    }
+
+    public List<MissionEvent> findAll() {
+        return repo.findAll();
     }
 }

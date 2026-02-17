@@ -68,4 +68,10 @@ public class Astronaut implements HasId<Integer>{
     public void setExperienceLevel(Integer experienceLevel) {
         this.experienceLevel = experienceLevel;
     }
+    @Override
+    public String toString(){
+//        [#id] name | spacecraft | status | exp=<experienceLevel>
+
+        return String.format("[#%d] %s | %s | %s | exp=%d",id,name,spacecraft,status,experienceLevel);
+    }
 }
