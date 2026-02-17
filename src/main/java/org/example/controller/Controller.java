@@ -36,7 +36,7 @@ public class Controller {
         System.out.println("\n--- MENU ---");
         System.out.println("1. Show all");
         System.out.println("2. Filter active astronauts by spacecraft");
-        System.out.println("3. Sort by city");
+        System.out.println("3. Sort by Experience");
         System.out.println("4. Save Vehicles to file");
         System.out.println("5. Show first 5 risk scores");
         System.out.println("6. Show risks");
@@ -48,7 +48,7 @@ public class Controller {
         switch (option) {
             case 1 -> showAll();
             case 2 -> filterAstronautBySpacecraft();
-//            case 3 -> sortByCity();
+            case 3 -> sortByExperience();
 //            case 4 -> saveVehiclesToFile();
 //            case 5 -> showFirst5Events();
 //            case 6 -> showRisks();
@@ -56,6 +56,10 @@ public class Controller {
             case 0 -> System.out.println("Exit");
             default -> System.out.println("Invalid Option");
         }
+    }
+
+    private void sortByExperience() {
+        astronautService.sortAstronautsByExperience().forEach(e -> System.out.println(e.toString()));
     }
 
     private void filterAstronautBySpacecraft() {

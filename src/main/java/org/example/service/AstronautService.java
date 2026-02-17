@@ -26,4 +26,16 @@ public class AstronautService {
                     .toList();
      }
 
+     public List<Astronaut> sortAstronautsByExperience() {
+
+            return repo.findAll().stream()
+                    .sorted((a1, a2) -> {
+                        int experienceComparison = Integer.compare(a2.getExperienceLevel(), a1.getExperienceLevel());
+                        if (experienceComparison != 0) {
+                            return experienceComparison;
+                        } else {
+                            return a1.getName().compareToIgnoreCase(a2.getName()); }
+                    })
+                    .toList();
+     }
 }
