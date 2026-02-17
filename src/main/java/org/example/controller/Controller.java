@@ -68,6 +68,12 @@ public class Controller {
     private void showRanking() {
 
        Map<Integer,Integer> resutl = missionEventService.calculateTotalScores();
+       Map <Integer,Integer>resultSuplies = supplyService.calculateTotalScores();
+         for(Map.Entry<Integer,Integer> entry : resultSuplies.entrySet()){
+              Integer astronautId = entry.getKey();
+              Integer supplyPoints = entry.getValue();
+              resutl.put(astronautId, resutl.getOrDefault(astronautId, 0) + supplyPoints);
+         }
        Map<Astronaut,Integer> resultWithAstronaut = resutl.entrySet().stream()
                .collect(java.util.stream.Collectors.toMap(
                        e -> astronautService.findById(e.getKey()),

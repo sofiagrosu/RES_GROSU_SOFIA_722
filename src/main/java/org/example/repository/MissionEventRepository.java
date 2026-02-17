@@ -17,15 +17,6 @@ public class MissionEventRepository extends AbstractJSONRepository<Integer, Miss
     public List<MissionEvent> findAll() {
         return super.findAll();
     }
-//    Abschlussbericht
-//Erstellen Sie die Datei mission_report.txt, welche die
-//Anzahl der MissionEvents pro MissionEventType (basierend
-//auf events.json) enthält.
-//Sortierung:
-//● zuerst nach Anzahl absteigend
-//● bei Gleichstand nach Name aufsteigend
-//Ausgabeformat:
-//<TYPE> -> <ANZAHL>
 
     public void generateMissionReport(String outputFilePath) {
         java.util.Map<String, Long> eventCount = this.findAll().stream()
@@ -41,9 +32,7 @@ public class MissionEventRepository extends AbstractJSONRepository<Integer, Miss
                 })
                 .toList();
 
-        // Schreibe die Ergebnisse in die Datei
-//        //Ausgabeformat:
-//<TYPE> -> <ANZAHL>
+
         try (java.io.PrintWriter writer = new java.io.PrintWriter(outputFilePath)) {
             sortedEventCount.forEach(entry -> writer.println(entry.getKey() + " -> " + entry.getValue()));
             System.out.println("The mission report has been generated: " + outputFilePath);

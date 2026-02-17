@@ -56,10 +56,11 @@ public class MissionEventService {
 
     public Map<Integer, Integer> calculateTotalScores() {
         Map<Integer, Integer> totalScores = new HashMap<>();
-
+         this.calculatePoints();
         for (MissionEvent e : findAll()) {
            Integer astronaut = e.getAstronautId();
-            int computedPoints = e.getComputedPoints();
+            int computedPoints = e.getBasePoints();
+
             totalScores.put(astronaut, totalScores.getOrDefault(astronaut, 0) + computedPoints);
         }
 
